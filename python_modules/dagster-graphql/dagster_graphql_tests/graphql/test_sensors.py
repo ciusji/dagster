@@ -559,7 +559,7 @@ def test_sensor_ticks_filtered(graphql_context):
         variables={"sensorSelector": sensor_selector, "statuses": ["STARTED"]},
     )
     assert len(result.data["sensorOrError"]["sensorState"]["ticks"]) == 1
-    result.data["sensorOrError"]["sensorState"]["ticks"][0]["status"] == "STARTED"
+    assert result.data["sensorOrError"]["sensorState"]["ticks"][0]["status"] == "STARTED"
 
     result = execute_dagster_graphql(
         graphql_context,
@@ -567,7 +567,7 @@ def test_sensor_ticks_filtered(graphql_context):
         variables={"sensorSelector": sensor_selector, "statuses": ["FAILURE"]},
     )
     assert len(result.data["sensorOrError"]["sensorState"]["ticks"]) == 1
-    result.data["sensorOrError"]["sensorState"]["ticks"][0]["status"] == "FAILURE"
+    assert result.data["sensorOrError"]["sensorState"]["ticks"][0]["status"] == "FAILURE"
 
     result = execute_dagster_graphql(
         graphql_context,
@@ -575,4 +575,4 @@ def test_sensor_ticks_filtered(graphql_context):
         variables={"sensorSelector": sensor_selector, "statuses": ["SKIPPED"]},
     )
     assert len(result.data["sensorOrError"]["sensorState"]["ticks"]) == 1
-    result.data["sensorOrError"]["sensorState"]["ticks"][0]["status"] == "SKIPPED"
+    assert result.data["sensorOrError"]["sensorState"]["ticks"][0]["status"] == "SKIPPED"
